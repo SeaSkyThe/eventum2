@@ -1,0 +1,11 @@
+<div>
+    <h1><a href="/">Eventum</a></h1>
+</div>
+
+{% for event in events %}
+    <div>
+        <h2><a href="{% url 'event_detail' pk=event.id %}">{{ event.title }}</a></h2>
+        <p>--> Start: {{ event.start_datetime }}</p>
+        <p>--> End: {{ event.end_datetime }}</p></br>
+    </div>
+{% endfor %}
