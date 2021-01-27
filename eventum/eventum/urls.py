@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.urls import path
+
 
 #Customizing fields from Admin page
 admin.site.site_header = 'Eventum admin'
@@ -26,5 +28,5 @@ admin.empty_value_display = '**Empty**'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^events/', include('event.urls')),
-    url(r'', include('event.urls'))
+    path('', include('main.urls')), #pagina inicial, exibindo os eventos
 ]
