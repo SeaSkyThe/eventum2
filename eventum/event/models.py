@@ -15,7 +15,7 @@ class Event(models.Model):
 class Organize_Event(models.Model):
     user_id = models.ForeignKey('user.User', on_delete=models.DO_NOTHING)
     event_id = models.ForeignKey('event.Event', on_delete=models.DO_NOTHING)
-   
+
 
 class Activity(models.Model):
     id = models.AutoField(primary_key=True)
