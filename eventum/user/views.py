@@ -4,13 +4,13 @@ from django.shortcuts import render
 
 # Listar eventos de um determinado organizador
 def event_list_organizer(request, organizer_id):
-    events = Event.objects.raw('''SELECT * FROM event_event LEFT JOIN event_organize_event on 
+    events = Event.objects.raw('''SELECT * FROM event_event LEFT JOIN event_organize_event on
                                 (event_organize_event.event_id = event_event.id AND event_organize_event.user_id = %s)''', [organizer_id])
     return render(request, 'event_list.html', {'events': events})
 
 # Listar eventos que um usuário está inscrito
 def event_list_user(request, participant_id):
-    events = Event.objects.raw('''SELECT * FROM event_event LEFT JOIN subscription_subscription on 
+    events = Event.objects.raw('''SELECT * FROM event_event LEFT JOIN subscription_subscription on
                                 (subscription_subscription.event_id = event_event.id AND subscription_subscription.user_id = %s)''', [participant_id])
     return render(request, 'event_list.html', {'events': events})
 
