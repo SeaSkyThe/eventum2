@@ -14,16 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import path
 
-
 #Customizing fields from Admin page
-admin.site.site_header = 'Eventum admin'
-admin.site.site_title = 'Eventum admin'
+admin.site.site_header = 'Administração do Eventum'
+admin.site.site_title = 'Administração Eventum'
 admin.site.site_url = 'http://eventum.com.br/' #change later
-admin.site.index_title = 'Eventum administration'
-admin.empty_value_display = '**Empty**'
+admin.site.index_title = 'Administração Eventum'
+admin.empty_value_display = '**Vazio**'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

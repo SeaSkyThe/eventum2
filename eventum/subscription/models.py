@@ -4,9 +4,12 @@ from django.utils import timezone
 # Create your models here.
 class Subscription_Type(models.Model):
     id = models.AutoField(primary_key=True)
-    event_id = models.ForeignKey('event.Event', on_delete=models.DO_NOTHING)
+    event_id = models.ForeignKey('event.Event', on_delete=models.DO_NOTHING, verbose_name='Evento')
     description = models.CharField(max_length=255, null=False)
     cost = models.FloatField(null=False)
+
+    def __str__(self):
+        return f'{self.description} ({self.event_id})'
 
 
 class Subscription(models.Model):
@@ -16,6 +19,9 @@ class Subscription(models.Model):
     event_id = models.ForeignKey('event.Event', on_delete=models.DO_NOTHING)
     date = models.DateTimeField(default=timezone.now, null=False)
     cost = models.FloatField(null=False)
+
+    def __str__(self):
+        return f'{self.user_id} - {self.event_id}'
 
 
 class Subscription_Activity(models.Model):
