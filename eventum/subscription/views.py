@@ -9,11 +9,11 @@ from django.views.generic import View
 from user.forms import SignUpForm
 #Importando bibliotecas para autenticação
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 #view que irá ficar responsavel pelo cadastro do usuário
 
-# TODO: TENTAR APENAS CRIAR UM USUARIO NOSSO NOVO COM O QUE FOI PEGO NO FORM, E USAR O ESQUEMA DE AUTENTICAÇÃO DO USER DO PROPRIO DJANGO
-
+#REGISTRO DO USUARIO NO SISTEMA
 def SignUp(request):
     form = SignUpForm()
     if(request.method == "POST"):
@@ -26,7 +26,7 @@ def SignUp(request):
     if(form.is_valid()):
         user = form.save()
         #editando manualmente o nome de perfil para o username, caso nenhum seja passado
-        
+
         #definindo que o usuario é participante ao se cadastrar.
         user.type_participant = True
 
@@ -45,9 +45,22 @@ def SignUp(request):
             context={"form":form})
 
 
+#LOGIN DO USUARIO NO SISTEMA
 def Login(request):
-    return render(request = request,
-        template_name = "subscription/login.html")
+    # form = AuthenticationForm()
+    # if(request.method == "POST"):
+    #     form = AuthenticationForm(request.POST)
+    #     print("ENTROU AQUI")
+    # print(form)
+    # if(form.is_valid()):
+    #     username = form.username
+    #     password = form.password
+    #     print("ENTROU AQUI 2")
+    #     user = authenticate(username=username, password=password)
+    #     login(request, user)
+    #     return redirect('a')
+
+    return render(request = request, template_name = "subscription/login.html", context={"form":form})
 
 def Logout(request):
     logout(request)

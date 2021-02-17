@@ -27,6 +27,7 @@ admin.empty_value_display = '**Vazio**'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    path('', include("django.contrib.auth.urls")), #paginas de autenticacao
     url(r'^events/', include('event.urls')),
     path('', include('main.urls')), #pagina inicial, exibindo os eventos
     path('', include('subscription.urls')), #login e signin

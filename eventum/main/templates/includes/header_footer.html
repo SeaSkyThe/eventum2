@@ -84,6 +84,10 @@
     </header>
 
     <!-- AQUI VAI O CONTEUDO -->
+    {% if user.is_authenticated %}
+
+    {%  endif %}
+
     {% block content %}
     {% endblock %}
 
