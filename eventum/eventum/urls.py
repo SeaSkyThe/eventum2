@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^events/', include('event.urls')),
     path('', include('main.urls')), #pagina inicial, exibindo os eventos
+    path('', include('subscription.urls')), #login e signin
 ]

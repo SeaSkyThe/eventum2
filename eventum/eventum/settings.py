@@ -126,3 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# MODO DE AUTENTICAÇÃO, UTILIZANDO O USUÁRIO FEITO POR NÓS
+AUTH_USER_MODEL = 'user.User'
