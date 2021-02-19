@@ -36,9 +36,14 @@ def SignUp(request):
         password = form.cleaned_data.get('password1')
 
         user = authenticate(username=username, password=password)
+        print(authenticate(username=username, password=password))
         login(request, user)
 
-        return redirect('/login')
+
+
+        return render(request = request,
+            template_name = "main/home.html",
+            context={"user":user, "form":form})
     else:
         return render(request = request,
             template_name = "subscription/signup.html",
@@ -46,23 +51,23 @@ def SignUp(request):
 
 
 #LOGIN DO USUARIO NO SISTEMA
-def Login(request):
-    # form = AuthenticationForm()
-    # if(request.method == "POST"):
-    #     form = AuthenticationForm(request.POST)
-    #     print("ENTROU AQUI")
-    # print(form)
-    # if(form.is_valid()):
-    #     username = form.username
-    #     password = form.password
-    #     print("ENTROU AQUI 2")
-    #     user = authenticate(username=username, password=password)
-    #     login(request, user)
-    #     return redirect('a')
+# def Login(request):
+#     # form = AuthenticationForm()
+#     # if(request.method == "POST"):
+#     #     form = AuthenticationForm(request.POST)
+#     #     print("ENTROU AQUI")
+#     # print(form)
+#     # if(form.is_valid()):
+#     #     username = form.username
+#     #     password = form.password
+#     #     print("ENTROU AQUI 2")
+#     #     user = authenticate(username=username, password=password)
+#     #     login(request, user)
+#     #     return redirect('a')
+#
+#     return render(request = request, template_name = "subscription/login.html", context={"form":form})
 
-    return render(request = request, template_name = "subscription/login.html", context={"form":form})
-
-def Logout(request):
+def logout_request(request):
     logout(request)
-    return render(request = request,
-        template_name = "/")
+    message.info(request, "Logout realizado com sucesso!")
+    return redirect("/login")
