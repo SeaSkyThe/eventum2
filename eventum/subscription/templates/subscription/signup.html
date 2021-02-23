@@ -1,0 +1,147 @@
+<!doctype html>
+{% extends "includes/header_footer.html" %}
+
+{% block content %}
+    <br>
+    <form class="row g-3" method="POST">
+      {% csrf_token %}
+      
+      <!-- Credenciais -->
+        <div class="col-md-4">
+            <label for="inputUserName" class="form-label">Username</label>
+            <input type="text" class="form-control" name="username" id="inputUserName" placeholder="Joazinho14" {% if form.is_bound %} value="{{form.username.value}}" {% endif %}>
+            {% for err in form.username.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="inputFirstName" class="form-label">Nome</label>
+            <input type="text" class="form-control" name="first_name" id="inputFirstName" {% if form.is_bound %} value="{{form.first_name.value}}" {% endif %}>
+            {% for err in form.first_name.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="inputLastName" class="form-label">Sobrenome</label>
+            <input type="text" class="form-control" name="last_name" id="inputLastName" {% if form.is_bound %} value="{{form.last_name.value}}" {% endif %}>
+            {% for err in form.last_name.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email"id="inputEmail" placeholder="exemplo@gmail.com" {% if form.is_bound %} value="{{form.email.value}}" {% endif %}>
+            {% for err in form.email.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <label for="inputSenha1" class="form-label">Senha</label>
+            <input type="password" class="form-control" name="password1" id="inputSenha1" {% if form.is_bound %} value="{{form.password1.value}}" {% endif %}>
+            {% for err in form.password1.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="inputSenha2" class="form-label">Confirme sua senha</label>
+            <input type="password" class="form-control" name="password2" id="inputSenha2" {% if form.is_bound %} value="{{form.password2.value}}" {% endif %}>
+            {% for err in form.password2.errors %}
+                <small class ="text-danger"> {{form.password2.errors}} </small>
+            {% endfor %}
+        </div>
+        <!-- Dados Pessoais -->
+        <div class="col-3">
+            <label for="inputPhone" class="form-label">Telefone</label>
+            <input type="text" class="form-control" name="phone" id="inputPhone" placeholder="18996532123" {% if form.is_bound %} value="{{form.phone.value}}" {% endif %}>
+            {% for err in form.phone.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+
+        <div class="col-3">
+            <label for="inputEndereco" class="form-label">Endereço</label>
+            <input type="text" class="form-control" name="street" id="inputEndereco" placeholder="Rua Barão Geraldo" {% if form.is_bound %} value="{{form.street.value}}" {% endif %}>
+            {% for err in form.street.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+        <div class="col-3">
+            <label for="inputNumero" class="form-label">Numero</label>
+            <input type="number" class="form-control" name="house_number" id="inputNumero" placeholder="115" {% if form.is_bound %} value="{{form.house_number.value}}" {% endif %}>
+            {% for err in form.house_number.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+        <div class="col-3">
+            <label for="inputComplemento" class="form-label">Complemento</label>
+            <input type="text" class="form-control" name="complement" id="inputComplemento" placeholder="Apartamento, Piso, Andar..." {% if form.is_bound %} value="{{form.complement.value}}" {% endif %}>
+            {% for err in form.complement.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+        <div class="col-md-6">
+            <label for="inputCidade" class="form-label">Cidade</label>
+            <input type="text" class="form-control" name="district" id="inputCidade" {% if form.is_bound and form.district.value != None %} value="{{form.district.value}}" {% endif %}>
+            {% for err in form.district.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputZip" class="form-label">CEP</label>
+            <input type="text" class="form-control" name="CEP" id="inputCEP" placeholder="Apenas numeros..." {% if form.is_bound %} value="{{form.CEP.value}}" {% endif %}>
+            {% for err in form.CEP.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-3">
+            <label for="inputCPF" class="form-label">CPF</label>
+            <input type="text" class="form-control" name="CPF" id="inputCPF" placeholder="08022134292" {% if form.is_bound %} value="{{form.CPF.value}}" {% endif %}>
+            {% for err in form.CPF.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+        <!-- PERFIL  -->
+        <div class="col-md-3">
+            <label for="inputlink" class="form-label">Link</label>
+            <input type="text" class="form-control" name="link" id="inputlink" placeholder="www.facebook.com/Joazinho14" {% if form.is_bound %} value="{{form.link.value}}"{% endif %}>
+            {% for err in form.link.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <label for="inputFotoPerfil" class="form-label">Foto de Perfil</label>
+            <input type="text" class="form-control" name="profile_picture" id="inputFotoPerfil" {% if form.is_bound %} value="{{form.profile_picture.value}}" {% endif %}>
+            {% for err in form.profile_picture.errors %}
+                <small class ="text-danger"> {{err}} </small>
+            {% endfor %}
+        </div>
+
+
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  Possivel botao de check
+                </label>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </div>
+    </form>
+
+
+    Se você já tem uma conta, faça o <a href="/login" target="blank"><strong>login</strong></a>.
+
+
+{% endblock %}
+
+  </body>
+</html>

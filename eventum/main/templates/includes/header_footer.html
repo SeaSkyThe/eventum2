@@ -14,6 +14,7 @@
       <!-- BOOTSRAP E FONTSAWESOME CSS -->
       <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
       <link href="{% static 'fa/css/all.min.css' %}" rel="stylesheet">
+      <!-- <link href="{% static 'css/header_footer.css' %}" rel="stylesheet"> -->
 
 
       <!-- Favicons -->
@@ -47,7 +48,7 @@
 
 <!-- NAVBAR HEADER  -->
     <header>
-      <div class="bg-dark collapse" id="navbarHeader" style>
+      <div class="bg-dark collapse navbar-collapse" role="navigation" id="navbarHeader" style>
         <div class="container">
           <div class="row">
             <div class="col-sm-8 col-md-7 py-4">
@@ -55,11 +56,25 @@
               <p class="text-muted">Aqui algumas informações extras sobre o nosso trabalho/app. Em andamento...</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contato</h4>
+              <h4 class="text-white">Menu</h4>
               <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Siga-nos no Twitter</a></li>
-                <li><a href="#" class="text-white">Nos chame no Facebook</a></li>
-                <li><a href="#" class="text-white">Envie-nos um email</a></li>
+
+                {% if not user.is_anonymous or user == None%} <!-- Verifica se tem alguem logado -->
+                  {% if user.is_authenticated %} <!-- Verifica se o usuário está devidamente autenticado -->
+                    {% if user.is_staff %} <!-- Verifica se o usuário é administrador -->
+                        <li><p class="text-white">Seja bem vindo: {{ user.get_username }}</p></li>
+                        <li><p class = "text-white"> Você está logado como administrador.</a></p></li>
+                        <li><p class = "text-white"> Ir para a pagina de <a href="/admin/" class="text-white">administração.</a></p></li>
+                    {% else %} <!-- Caso não seja administrador -->
+                        <li><p class="text-white">Seja bem vindo: {{ user.get_username }}</p></li>
+                    {% endif %}
+                    <li><form><a href="/logout" class="text-white">Logout</a></form></li>
+                  {% endif %}
+                {% else %} <!-- Caso nao tenha ninguem logado -->
+                  <li><a href="/signup/" class="text-white">Registre-se no nosso site</a></li>
+                  <li><a href="/login/" class="text-white">Login</a></li>
+                {% endif %}
+
               </ul>
             </div>
           </div>
@@ -76,7 +91,7 @@
               </span>
           </a>
           <!-- BOTAO DE ABRIR NAVBAR -->
-          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
         </div>
@@ -84,25 +99,28 @@
     </header>
 
     <!-- AQUI VAI O CONTEUDO -->
+
+
     {% block content %}
     {% endblock %}
 
 
     <!-- FOOTER -->
-    <footer class="text-muted py-5">
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">Trabalho desenvolvido por: Rafael Chinaglia, Marcelo Eduardo e Giovanna Marinho &copy</p>
-        <p class="mb-0">Trabalho sendo desenvolvido para a disciplina de DB1. <a href="https://github.com/SeaSkyThe/eventum2">Link do projeto no GitHub(?).</a>  <a>Licenças aplicadas ao projeto, leia-as antes de utilizar qualquer coisa.</a>.</p>
-      </div>
-    </footer>
 
-    <!-- CARREGANDO JS NO FIM DA PAGINA PARA SER MAIS RAPIDO -->
-    <script scr="{% static 'js/bootstrap.min.js' %}"></script>
-    <script scr="{% static 'js/bootstrap.bundle.js' %}"></script>
-    <script scr="{% static 'js/bootstrap.esm.js' %}"></script>
+      <footer class="text-muted py-5">
+        <div class="container">
+          <p class="float-end mb-1">
+            <a href="#">Back to top</a>
+          </p>
+          <p class="mb-1">Trabalho desenvolvido por: Rafael Chinaglia, Marcelo Eduardo e Giovanna Marinho &copy</p>
+          <p class="mb-0">Trabalho sendo desenvolvido para a disciplina de DB1. <a href="https://github.com/SeaSkyThe/eventum2">Link do projeto no GitHub(?).</a>  <a>Licenças aplicadas ao projeto, leia-as antes de utilizar qualquer coisa.</a>.</p>
+        </div>
+      </footer>
+
+
+    <!-- CARREGANDO JS NO FIM DA PAGINA PARA SER MAIS RAPIDO - UTILIZEI LINK POIS O ARQUIVO ESTÁTICO NAO ESTA SENDO CARREGADO-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
 
 
 

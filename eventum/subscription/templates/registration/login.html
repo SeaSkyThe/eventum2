@@ -1,0 +1,62 @@
+<!doctype html>
+{% extends "includes/header_footer.html" %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+
+    <form class="row g-3" method="POST">
+      {% csrf_token %}
+      <!-- Credenciais -->
+      <div class="row justify-content-center">
+          <div class="col-md-3">
+              <label for="inputUserName" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username" id="inputUserName" {% if form.is_bound %} value="{{form.username.value}}" {% endif %}>
+              {% for err in form.username.errors %}
+                  <small class ="text-danger"> {{err}} </small>
+              {% endfor %}
+          </div>
+      </div>
+
+      <div class="row justify-content-center">
+          <div class="col-md-3">
+              <label for="inputSenha" class="form-label">Senha</label>
+              <input type="password" class="form-control" name="password" id="inputSenha" {% if form.is_bound %} value="{{form.password.value}}" {% endif %}>
+              {% for err in form.password.errors %}
+                  <small class ="text-danger"> {{err}} </small>
+              {% endfor %}
+
+              {% if user != None %}
+                  {% if not user.is_authenticated %}
+                      <small class ="text-danger"> {{form.non_field_errors}} </small>
+                  {% endif %}
+              {% endif %}
+
+          </div>
+      </div>
+
+      <div class="row justify-content-around align-items-center">
+          <div class="col-md-3">
+              Se você não tem uma conta, se <a href="/signup" target="blank"><strong>registre</strong></a>.
+              <br></br>
+          </div>
+      </div>
+
+      <div class="row justify-content-around align-items-center">
+          <div class="col-md-1">
+              <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+      </div>
+
+    </form>
+
+
+
+
+
+
+{% endblock %}
+
+  </body>
+</html>
